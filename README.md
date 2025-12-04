@@ -42,6 +42,32 @@ EnviosApp es una aplicación demostrativa desarrollada con Spring Boot y Thymele
 - API REST para envíos, rutas, cargas y trazabilidad: `GET`, `POST`, `PUT`, `DELETE` según controlador correspondiente.
 - Búsqueda rápida desde la barra de navegación (por ID o texto en origen/destino).
 
+## DTOs (Data Transfer Objects)
+
+Para separar las entidades JPA del contrato de la API y de las vistas, el proyecto incluye varios DTOs dentro del paquete `pe.edu.utp.dto`.
+
+- **Ubicación:** `src/main/java/pe/edu/utp/dto/`
+- **Clases añadidas (ejemplo):** `EnvioDTO`, `EnvioCreateDTO`, `RutaDTO`, `CargaDTO`, `CargaItemDTO`, `TrazabilidadDTO`.
+- **Propósito:**
+
+  - `EnvioDTO` sirve para devolver datos de un `Envio` (incluye `id` y `fecha`).
+  - `EnvioCreateDTO` se usa para recibir datos de creación (desde formularios o API) sin exponer campos de entidad que no deberían recibirse directamente.
+  - Otros DTOs (`RutaDTO`, `CargaDTO`, `CargaItemDTO`, `TrazabilidadDTO`) modelan respuestas o inputs para sus correspondientes entidades.
+
+- **Recomendaciones:**
+  - Implementar mapeadores entre entidades y DTOs. Puedes crear mappers manuales (`EnvioMapper.toDto(...)`, `EnvioMapper.fromCreateDto(...)`) o usar **MapStruct** para generación automática.
+  - Validar DTOs en los controladores con `@Valid` y anotaciones de Bean Validation (`@NotNull`, `@Size`, etc.).
+  - Usar DTOs para los endpoints públicos (REST) y adaptar las vistas Thymeleaf a DTOs si quieres mantener una clara separación entre capa de persistencia y presentación.
+
+Ejemplo de uso rápido en un controlador REST:
+
+```java
+// convertir entidad a DTO antes de devolver
+Envio envio = envioServicio.findById(id);
+EnvioDTO dto = EnvioMapper.toDto(envio);
+return ResponseEntity.ok(dto);
+```
+
 ## Cómo ejecutar (Windows / PowerShell)
 
 1. Abrir PowerShell en la carpeta del proyecto:
