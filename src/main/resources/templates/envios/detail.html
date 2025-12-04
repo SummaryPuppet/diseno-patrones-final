@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{layout :: head('Detalle Envío')}"></head>
+  <body>
+    <div th:replace="~{layout :: header}"></div>
+
+    <div class="container py-4">
+      <h1>Detalle del Envío</h1>
+      <div th:if="${envio == null}">
+        <div class="alert alert-warning">Envío no encontrado.</div>
+        <a href="/envios" class="btn btn-secondary">Volver</a>
+      </div>
+      <div th:if="${envio != null}">
+        <dl class="row">
+          <dt class="col-sm-3">ID</dt>
+          <dd class="col-sm-9" th:text="${envio.id}"></dd>
+          <dt class="col-sm-3">Tipo</dt>
+          <dd class="col-sm-9" th:text="${envio.envioTipo}"></dd>
+          <dt class="col-sm-3">Origen</dt>
+          <dd class="col-sm-9" th:text="${envio.origen}"></dd>
+          <dt class="col-sm-3">Destino</dt>
+          <dd class="col-sm-9" th:text="${envio.destino}"></dd>
+          <dt class="col-sm-3">Estado</dt>
+          <dd class="col-sm-9" th:text="${envio.status}"></dd>
+          <dt class="col-sm-3">Fecha</dt>
+          <dd class="col-sm-9" th:text="${envio.fecha}"></dd>
+        </dl>
+        <a href="/envios" class="btn btn-secondary">Volver</a>
+        <a
+          th:href="@{'/trazabilidad/envio/' + ${envio.id}}"
+          class="btn btn-outline-info ms-2"
+          >Ver trazabilidad</a
+        >
+        <form
+          th:action="@{'/envios/' + ${envio.id} + '/avance'}"
+          method="post"
+          style="display: inline"
+        >
+          <button class="btn btn-success">Avanzar estado</button>
+        </form>
+      </div>
+    </div>
+
+    <div th:replace="~{layout :: footer}"></div>
+  </body>
+</html>

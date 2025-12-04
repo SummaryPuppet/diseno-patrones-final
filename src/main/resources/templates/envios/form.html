@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{layout :: head('Nuevo Envío')}"></head>
+  <body>
+    <div th:replace="~{layout :: header}"></div>
+
+    <div class="container py-4">
+      <h1>Crear nuevo Envío</h1>
+      <form th:action="@{/envios}" method="post" th:object="${envio}">
+        <div class="mb-3" th:if="${rutas}">
+          <label class="form-label"
+            >Rutas disponibles (seleccionar para completar
+            origen/destino)</label
+          >
+          <select id="envioRutaSelect" class="form-select">
+            <option value="">-- Seleccionar ruta --</option>
+            <option
+              th:each="r : ${rutas}"
+              th:value="${r.id}"
+              th:attr="data-origen=${r.origen},data-destino=${r.destino}"
+              th:text="${r.origen} + ' → ' + ${r.destino} + ' (' + ${r.tipo} + ')'"
+            ></option>
+          </select>
+        </div>
+        <input type="hidden" th:field="*{rutaId}" id="envioRutaIdInput" />
+        <div class="mb-3">
+          <label class="form-label">Tipo</label>
+          <select class="form-select" th:field="*{envioTipo}">
+            <option
+              th:each="t : ${tipos}"
+              th:value="${t}"
+              th:text="${t}"
+            ></option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Origen</label>
+          <input
+            class="form-control"
+            type="text"
+            th:field="*{origen}"
+            id="envioOrigenInput"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Destino</label>
+          <input
+            class="form-control"
+            type="text"
+            th:field="*{destino}"
+            id="envioDestinoInput"
+          />
+        </div>
+        <button class="btn btn-primary" type="submit">Crear</button>
+        <a href="/envios" class="btn btn-secondary">Cancelar</a>
+      </form>
+    </div>
+
+    <div th:replace="~{layout :: footer}"></div>
+  </body>
+</html>

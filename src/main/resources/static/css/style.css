@@ -1,0 +1,41 @@
+body {
+  background: #f8f9fa;
+  /* Ensure the app layout keeps footer pinned to bottom even if templates
+     don't put the body classes from the layout fragment. This makes the
+     body a column flex container with minimum full viewport height. */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.container {
+  max-width: 960px;
+}
+.py-4 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+/* Make the main page container take remaining vertical space when it's a
+   direct child of the body. Many templates render a top header then a
+   <div class="container py-4"> as a direct child of body, so this
+   selector ensures the visible page content grows to push the footer down. */
+body > .container,
+body > main {
+  flex: 1 0 auto;
+}
+
+/* Ensure footer stays visually at the bottom and doesn't get overlapped. */
+footer {
+  margin-top: auto;
+}
+
+/* Navbar tweaks */
+.navbar-brand {
+  font-weight: 600;
+}
+.navbar .form-control {
+  width: 180px;
+}
+.navbar-nav .nav-link {
+  margin-right: 0.5rem;
+}

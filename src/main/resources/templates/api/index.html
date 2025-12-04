@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{layout :: head('API - EnviosApp')}"></head>
+  <body>
+    <div th:replace="~{layout :: header}"></div>
+
+    <main class="container py-4">
+      <h1>API — EnviosApp</h1>
+      <p>Endpoints REST disponibles:</p>
+
+      <ul class="list-group">
+        <li
+          th:each="entry : ${endpoints.entrySet()}"
+          class="list-group-item d-flex justify-content-between align-items-center"
+        >
+          <a th:href="@{${entry.key}}" th:text="${entry.key}"></a>
+          <small class="text-muted" th:text="${entry.value}"></small>
+        </li>
+      </ul>
+
+      <hr />
+      <p>
+        Usa herramientas como <strong>curl</strong> o
+        <strong>Postman</strong> para probar los endpoints. Para ver la interfaz
+        web del sistema visita <a th:href="@{/}">Inicio</a>.
+      </p>
+    </main>
+
+    <div th:replace="~{layout :: footer}"></div>
+  </body>
+</html>

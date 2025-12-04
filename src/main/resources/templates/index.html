@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{layout :: head('Envios - Inicio')}"></head>
+  <body>
+    <div th:replace="~{layout :: header}"></div>
+
+    <main class="container py-4 flex-grow-1">
+      <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-3">
+          <h1 class="display-5 fw-bold">Bienvenido a EnviosApp</h1>
+          <p class="col-md-8 fs-5">
+            Gestione envíos usando los patrones implementados en el backend.
+          </p>
+          <a class="btn btn-primary btn-lg" href="/envios" role="button"
+            >Ver envíos</a
+          >
+          <a class="btn btn-outline-secondary btn-lg" href="/api" role="button"
+            >Ver API</a
+          >
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Acciones</h3>
+          <ul>
+            <li><a href="/envios/nuevo">Crear nuevo envío</a></li>
+            <li><a href="/envios">Listar envíos</a></li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <h3>Información</h3>
+          <p>
+            Esta interfaz usa Thymeleaf y Bootstrap para prototipado rápido.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <div th:replace="layout :: footer"></div>
+  </body>
+</html>

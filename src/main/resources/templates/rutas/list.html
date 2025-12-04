@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{layout :: head('Rutas')}"></head>
+  <body>
+    <div th:replace="~{layout :: header}"></div>
+
+    <div class="container py-4">
+      <h1>Rutas</h1>
+      <a class="btn btn-primary mb-3" href="/rutas/nuevo">Crear ruta</a>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th>Distancia (km)</th>
+            <th>Tiempo (hrs)</th>
+            <th>Tipo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="r : ${rutas}">
+            <td th:text="${r.id}"></td>
+            <td th:text="${r.origen}"></td>
+            <td th:text="${r.destino}"></td>
+            <td th:text="${r.distanciaKm}"></td>
+            <td th:text="${r.tiempoEstimadoHoras}"></td>
+            <td th:text="${r.tipo}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div th:replace="~{layout :: footer}"></div>
+  </body>
+</html>

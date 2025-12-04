@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{layout :: head('Resultados de búsqueda')}"></head>
+  <body>
+    <div th:replace="~{layout :: header}"></div>
+
+    <div class="container py-4">
+      <h1>Resultados de búsqueda</h1>
+      <p>Consulta: <strong th:text="${query}"></strong></p>
+
+      <div th:if="${#lists.isEmpty(resultados)}">
+        <div class="alert alert-warning">
+          No se encontró ningún envío para la consulta indicada.
+        </div>
+        <a class="btn btn-secondary" th:href="@{/envios}">Volver al listado</a>
+      </div>
+
+      <div th:if="${!#lists.isEmpty(resultados)}">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tipo</th>
+              <th>Origen</th>
+              <th>Destino</th>
+              <th>Estado</th>
+              <th>Fecha</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="r : ${resultados}">
+              <td th:text="${r.id}"></td>
+              <td th:text="${r.envioTipo}"></td>
+              <td th:text="${r.origen}"></td>
+              <td th:text="${r.destino}"></td>
+              <td th:text="${r.status}"></td>
+              <td th:text="${r.fecha}"></td>
+              <td>
+                <a
+                  th:href="@{'/envios/' + ${r.id}}"
+                  class="btn btn-sm btn-primary"
+                  >Ver</a
+                >
+                <a
+                  th:href="@{'/trazabilidad/envio/' + ${r.id}}"
+                  class="btn btn-sm btn-outline-secondary"
+                  >Trazabilidad</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div th:replace="~{layout :: footer}"></div>
+  </body>
+</html>

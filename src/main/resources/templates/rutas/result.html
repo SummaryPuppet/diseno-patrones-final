@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{layout :: head('Ruta óptima')}"></head>
+  <body>
+    <div th:replace="~{layout :: header}"></div>
+
+    <div class="container py-4">
+      <h1>Ruta Óptima</h1>
+      <div th:if="${rutaOptima != null}">
+        <p>
+          <strong>Origen:</strong> <span th:text="${rutaOptima.origen}"></span>
+        </p>
+        <p>
+          <strong>Destino:</strong>
+          <span th:text="${rutaOptima.destino}"></span>
+        </p>
+        <p>
+          <strong>Distancia (km):</strong>
+          <span th:text="${rutaOptima.distanciaKm}"></span>
+        </p>
+        <p>
+          <strong>Tiempo (hrs):</strong>
+          <span th:text="${rutaOptima.tiempoEstimadoHoras}"></span>
+        </p>
+        <p><strong>Tipo:</strong> <span th:text="${rutaOptima.tipo}"></span></p>
+      </div>
+      <a href="/rutas" class="btn btn-secondary">Volver</a>
+    </div>
+
+    <div th:replace="~{layout :: footer}"></div>
+  </body>
+</html>

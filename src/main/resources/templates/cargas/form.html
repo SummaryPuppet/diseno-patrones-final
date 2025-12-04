@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{layout :: head('Crear Carga')}"></head>
+  <body>
+    <div th:replace="~{layout :: header}"></div>
+
+    <div class="container py-4">
+      <h1>Crear Carga</h1>
+      <form th:action="@{/cargas}" method="post" th:object="${carga}">
+        <div class="mb-3">
+          <label class="form-label">Descripción</label>
+          <input class="form-control" th:field="*{descripcion}" />
+        </div>
+
+        <h5>Items</h5>
+        <div th:each="item, iterStat : ${carga.items}">
+          <div class="mb-2">
+            <label class="form-label">Nombre</label>
+            <input
+              class="form-control"
+              th:field="*{items[__${iterStat.index}__].nombre}"
+            />
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Peso (kg)</label>
+            <input
+              class="form-control"
+              type="number"
+              step="0.01"
+              th:field="*{items[__${iterStat.index}__].pesoKg}"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Volumen (m3)</label>
+            <input
+              class="form-control"
+              type="number"
+              step="0.01"
+              th:field="*{items[__${iterStat.index}__].volumenM3}"
+            />
+          </div>
+          <hr />
+        </div>
+
+        <button class="btn btn-primary" type="submit">Crear</button>
+      </form>
+    </div>
+
+    <div th:replace="~{layout :: footer}"></div>
+  </body>
+</html>
